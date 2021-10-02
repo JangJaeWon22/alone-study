@@ -2,12 +2,13 @@
 
 const express = require("express");
 const router = express.Router();
-const controller = require("./home-controller")
+const controller = require("./home-controller");
 
-//컨트롤러 연결 - 루트페이지
-router.get("/", controller.home);
+//컨트롤러 연결 - controller - rendering - home의 키 값 = 루트페이지
+//컨트롤러 연결 - ontroller - rendering - login의 키 값 = 로그인 페이지
+router.get("/", controller.rendering.home);
+router.get("/login", controller.rendering.login);
 
-//컨트롤러 연결 - 로그인 페이지
-router.get("/login", controller.login);
+router.post("/login", controller.process.login);
 
 module.exports = router;
