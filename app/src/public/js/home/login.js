@@ -3,7 +3,7 @@
 //js파일 defer로 읽게 함(제일 먼저 읽게 해서 값을 가져올수 있도록 함)
 const id = document.querySelector("#id"), //html을 읽을 수 있도록 하는 document(최상위) 활용
   psword = document.querySelector("#psword"),
-  loginBtn = document.querySelector("button");
+  loginBtn = document.querySelector("#button");
 
 loginBtn.addEventListener("click", login);
 
@@ -34,7 +34,10 @@ function login() {
         alert(res.errorMassage);
       }
     })
-    .catch((err) => {  //서버에서 이상이 생겼을때 (ex. router 지웠을때) new Error 은 콘솔에서 찍혀 나옴
-        console.error(new Error("로그인 중 에러 발생"));
+    .catch((err) => {
+      //서버에서 이상이 생겼을때 (ex. router 지웠을때) new Error 은 콘솔에서 찍혀 나옴
+      console.error(new Error("로그인 중 에러 발생"));
     });
 }
+
+

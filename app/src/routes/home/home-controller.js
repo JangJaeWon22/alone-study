@@ -10,6 +10,9 @@ const rendering = {
   login: (req, res) => {
     res.render("home/login");
   },
+  register: (req, res) => {
+    res.render("home/register");
+  }
 };
 
 // 받아온 정보를 처리하는 역활이라 process라고 지음

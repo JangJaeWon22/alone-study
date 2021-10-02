@@ -8,6 +8,7 @@ const controller = require("./home-controller");
 //컨트롤러 연결 - ontroller - rendering - login의 키 값 = 로그인 페이지
 router.get("/", controller.rendering.home);
 router.get("/login", controller.rendering.login);
+router.get("/register", controller.rendering.register)
 
 router.post("/login", controller.process.login);
 
