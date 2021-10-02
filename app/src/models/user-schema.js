@@ -23,6 +23,17 @@ class userSchema {
     //저장된 user정보 오브젝트로 나옴 // console.log(newUsers); 
     return newUsers; //은닉화된 변수 반환
   }
+
+  static getUserInfo(id) {
+      const users = this.#users;
+      const idx = users.id.indexOf(id)
+      const usersKeys = Object.keys(users); // 키 값을 저장 => [id, psword, name]
+      const userInfo = usersKeys.reduce((newUser, info) => {
+          newUser[info] = users[info][idx];
+          return newUser;
+      }, {});
+      return userInfo;
+  } 
 }
 
 module.exports = userSchema;

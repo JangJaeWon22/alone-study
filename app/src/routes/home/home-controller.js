@@ -1,6 +1,6 @@
 "use strict";
 
-const userSchema = require("../../models/user-schema");
+const User = require("../../models/user");
 
 // 렌더링 하는 부분을 묶어서 rendering의 키 값에 가질 수 있도록 해줌
 const rendering = {
@@ -16,21 +16,8 @@ const rendering = {
 const process = {
   //로그인 활용
   login: (req, res) => {
-    const id = req.body.id,
-      psword = req.body.psword;
-
-    const users = userSchema.getUsers("id", "psword");
-
-    const response = {};
-    if (users.id.includes(id)) {
-      const idx = users.id.indexOf(id);
-      if (users.psword[idx] === psword) {
-        response.success = true;
-        return res.json(response);
-      }
-    }
-    response.success = false;
-    response.errorMassage = "로그인에 실패하셨습니다.";
+    const user = new User(req.body);
+    const response = user.login();
     return res.json(response);
   },
 };
