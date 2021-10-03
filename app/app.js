@@ -4,6 +4,8 @@ const express = require("express"); //모듈
 const app = express(); //모듈
 const bodyParser = require("body-parser"); //controller에서 req.body를 읽어들이지 못해서 라이브러리도 설치함.
 const home = require("./src/routes/home"); //라우팅
+const dotenv =  require("dotenv"); // 어떤 os에서 사용하더라도 환경변수를 설정하고 사용할 수 있다!
+dotenv.config();
 
 //views 연결
 app.set("views", "./src/views");

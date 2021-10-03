@@ -9,35 +9,37 @@ class User {
   //user.login
   async login() {
     const clientInfo = this.body;
-    //정보 가져오기
-     const {id , psword } = await userSchema.getUserInfo(clientInfo.id);
- 
-    //로그인 로직
-    if (id) {
-      if (id === clientInfo.id && psword === clientInfo.psword) {
-        return { success: true };
+    try {
+      //정보 가져오기
+      const { id, psword } = await userSchema.getUserInfo(clientInfo.id);
+      //로그인 로직
+      if (id) {
+        if (id === clientInfo.id && psword === clientInfo.psword) {
+          return { success: true };
+        }
+        return {
+          success: false,
+          errorMassage: "아이디와 비밀번호를 확인 후 다시 시도해주세요",
+        };
       }
       return {
         success: false,
         errorMassage: "아이디와 비밀번호를 확인 후 다시 시도해주세요",
       };
+    } catch (err) {
+      return { success: false, errorMassage: err};
     }
-    return {
-      success: false,
-      errorMassage: "아이디와 비밀번호를 확인 후 다시 시도해주세요",
-    };
   }
 
   //user.register();
-  async register () {
+  async register() {
     const clientInfo = this.body;
-    try{
-      const response = await userSchema.save(clientInfo); 
+    try {
+      const response = await userSchema.save(clientInfo);
       return response;
-    }catch (err) {
-      return { success: false, errorMassage: err }
+    } catch (err) {
+      return { success: false, errorMassage: err };
     }
-    
   }
 }
 
