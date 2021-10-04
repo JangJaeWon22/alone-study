@@ -31,7 +31,9 @@ function login() {
       if (res.success) {
         location.href = "/";
       } else {
+        console.log(res)
         alert(res.errorMassage);
+
       }
     })
     .catch((err) => {

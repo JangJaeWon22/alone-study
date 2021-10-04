@@ -9,7 +9,7 @@ class userSchema {
     return new Promise((resolve, reject) => {
       const query = "SELECT * FROM users WHERE id = ?;";
       db.query(query, [id] , (err, data) => {
-        if (err) reject(`${err}`);
+        if (err) reject(err);
         resolve(data[0]);
       });
     })
@@ -22,7 +22,7 @@ class userSchema {
       db.query(query, 
         [clientInfo.id, clientInfo.nickname, clientInfo.psword],
         (err) => {
-        if (err) reject(`${err}`);
+        if (err) reject(err);
         resolve({ success: true });
       });
     })
