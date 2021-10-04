@@ -32,7 +32,7 @@ function register() {
         alert(res.msg)
         location.href = "/login";
       } else {
-        alert(res.errorMassage);
+        alert(res.msg);
       }
     })
     .catch((err) => {

@@ -11,10 +11,10 @@ class User {
     const clientInfo = this.body;
     try {
       //정보 가져오기
-      const { id, psword } = await userSchema.getUserInfo(clientInfo.id);
+      const user = await userSchema.getUserInfo(clientInfo.id);
       //로그인 로직
-      if (id) {
-        if (id === clientInfo.id && psword === clientInfo.psword) {
+      if (user) {
+        if (user.id === clientInfo.id && user.psword === clientInfo.psword) {
           return { success: true };
         }
         return {
@@ -24,10 +24,10 @@ class User {
       } 
       return {
         success: false,
-        msg: "아이디와 비밀번호를 확인 후 다시 시도해주세요", // 아이디 틀렸을 떄
+        msg: "존재하지 않는 ID 입니다.", // 아이디 틀렸을 떄
       };
     } catch (err) {
-      return { success: false, msg: "서버 점검 중입니다. 잠시 후 시도해주세요", err}; //db연결 실패
+      return { success: false, msg: "서버 점검 중입니다.", err}; //db연결 실패, id 없을때
     }
   }
 
@@ -38,7 +38,7 @@ class User {
       const response = await userSchema.save(clientInfo);
       return { success: true, msg: "회원이 되신 걸 축하드립니다."}
     } catch (err) {
-      return { success: false, msg: "서버 점검 중입니다. 잠시 후 시도해주세요", err}; //db연결 실패
+      return { success: false, msg: "서버 점검 중입니다.", err}; //db연결 실패
     }
   }
 }

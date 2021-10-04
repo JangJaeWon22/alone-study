@@ -33,7 +33,7 @@ function login() {
       if (res.success) {
         location.href = "/";
       } else {
-        alert(res.errorMassage);
+        alert(res.msg);
 
       }
     })
