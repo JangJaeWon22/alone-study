@@ -1,6 +1,5 @@
 "use strict";
 
-const { response } = require("express");
 const logger = require("../../config/logger");
 const User = require("../../models/user");
 

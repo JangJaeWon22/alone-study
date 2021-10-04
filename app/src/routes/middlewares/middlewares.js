@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../../models/user");
 require('dotenv').config();
 
-module.exports = (req, res, next) => {
+module.exports.verifyToken = (req, res, next) => {
     const { authorization} = req,headers;
     const [ authType, authToken ] = (authorization || "").split(" ");
 
@@ -17,6 +17,7 @@ module.exports = (req, res, next) => {
 
     try {
         const { userId } = jwt.verify(authToken, process.env.JWT_SECRET);
+        // const user = await userSchema.getUserInfo(clientInfo.id);
         
     }catch (error) {
         if (error.name === 'TokenExpriedError'){ //유효 기간 초과
