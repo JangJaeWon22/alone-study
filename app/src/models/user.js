@@ -19,15 +19,15 @@ class User {
         }
         return {
           success: false,
-          errorMassage: "아이디와 비밀번호를 확인 후 다시 시도해주세요",
+          msg: "아이디와 비밀번호를 확인 후 다시 시도해주세요", // 비밀번호 틀렸을 때
         };
       } 
       return {
         success: false,
-        errorMassage: "아이디와 비밀번호를 확인 후 다시 시도해주세요",
+        msg: "아이디와 비밀번호를 확인 후 다시 시도해주세요", // 아이디 틀렸을 떄
       };
     } catch (err) {
-      return { success: false, errorMassage: err};
+      return { success: false, msg: "서버 점검 중입니다. 잠시 후 시도해주세요", err}; //db연결 실패
     }
   }
 
@@ -36,9 +36,9 @@ class User {
     const clientInfo = this.body;
     try {
       const response = await userSchema.save(clientInfo);
-      return response;
+      return { success: true, msg: "회원이 되신 걸 축하드립니다."}
     } catch (err) {
-      return { success: false, errorMassage: err };
+      return { success: false, msg: "서버 점검 중입니다. 잠시 후 시도해주세요", err}; //db연결 실패
     }
   }
 }

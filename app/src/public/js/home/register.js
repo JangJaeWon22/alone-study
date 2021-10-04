@@ -29,9 +29,9 @@ function register() {
     .then((res) => res.json())
     .then((res) => {
       if (res.success) {
+        alert(res.msg)
         location.href = "/login";
       } else {
-        console.log(res);
         alert(res.errorMassage);
       }
     })

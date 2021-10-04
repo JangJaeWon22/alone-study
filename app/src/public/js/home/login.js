@@ -8,6 +8,8 @@ const id = document.querySelector("#id"), //html을 읽을 수 있도록 하는 
 loginBtn.addEventListener("click", login);
 
 function login() {
+  if(!id.value) {return alert("아이디를 입력해주세요.")};
+  if (!psword.value) {return alert ("비밀번호를 입력해주세요")};
   const req = {
     //login을 요청하는 데이터라서 변수명 req라고 함.
     id: id.value,
@@ -31,7 +33,6 @@ function login() {
       if (res.success) {
         location.href = "/";
       } else {
-        console.log(res)
         alert(res.errorMassage);
 
       }
