@@ -1,5 +1,6 @@
 "use strict";
 
+const { response } = require("express");
 const logger = require("../../config/logger");
 const User = require("../../models/user");
 
@@ -29,11 +30,11 @@ const process = {
     const url = {
       method: "POST",
       path: "/login",
-      // status: response.err ? 400 : 200, //200 : 정상응답 , 300 : 페이지 이동시, 400: 클라이언트에서 실수, 500:서버에서 실수
-      status: response.success ? 200 : response.err ? 500 : 400,
+      status: response.success ? 200 : response.err ? 500 : 400,  //200 : 정상응답 , 300 : 페이지 이동시, 400: 클라이언트에서 실수, 500:서버에서 실수
     };
     log(response, url);
     return res.status(url.status).json(response);
+    
   },
   //회원가입 활용
   register: async (req, res) => {
@@ -49,9 +50,17 @@ const process = {
   },
 };
 
+// const verify = {
+//   verifyToken: async (req, res) => {
+//     return res.status.json();
+//   },
+// };
+
+
 module.exports = {
   rendering,
   process,
+  // verify,
 };
 
 const log = (response, url) =>{

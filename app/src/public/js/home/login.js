@@ -1,11 +1,18 @@
 "use strict";
 
-//js파일 defer로 읽게 함(제일 먼저 읽게 해서 값을 가져올수 있도록 함)
+
 const id = document.querySelector("#id"), //html을 읽을 수 있도록 하는 document(최상위) 활용
   psword = document.querySelector("#psword"),
   loginBtn = document.querySelector("#button");
 
 loginBtn.addEventListener("click", login);
+
+if (localStorage.getItem("token")){
+  getSelf(function () {
+    alert("이미 로그인이 되어있습니다. 블로그 페이지로 이동합니다.");
+    window.location.replace("/");
+  });
+}
 
 function login() {
   if(!id.value) {return alert("아이디를 입력해주세요.")};
@@ -31,6 +38,7 @@ function login() {
     //fetch에서 받은 응답값이 promise 값으로 넘어와서 then으로 제가공 // 확인 결과 .then((res) => console.log(res));
     .then((res) => {
       if (res.success) {
+        localStorage.setItem("token", res.token)
         location.href = "/";
       } else {
         alert(res.msg);

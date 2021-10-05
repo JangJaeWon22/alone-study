@@ -1,6 +1,7 @@
 "use strict";
 
 const userSchema = require("./user-schema");
+const jwt = require('jsonwebtoken'); 
 
 class User {
   constructor(body) {
@@ -12,10 +13,12 @@ class User {
     try {
       //정보 가져오기
       const user = await userSchema.getUserInfo(clientInfo.id);
+
       //로그인 로직
       if (user) {
         if (user.id === clientInfo.id && user.psword === clientInfo.psword) {
-          return { success: true };
+          const token = jwt.sign({userId: user.id }, process.env.JWT_SECRET);
+          return { token, success: true };
         }
         return {
           success: false,
