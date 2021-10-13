@@ -10,12 +10,14 @@ const id = document.querySelector("#id"), //html을 읽을 수 있도록 하는 
 registerBtn.addEventListener("click", register);
 
 function register() {
-    if(!id.value) return alert("아이디를 입력해주세요.");
-    if (psword.value !== confirmPsword.value) {return alert ("비밀번호가 일치하지 않습니다.")};
+  if (!id.value) return alert("아이디를 입력해주세요.");
+  if (psword.value !== confirmPsword.value) {
+    return alert("비밀번호가 일치하지 않습니다.");
+  }
   const req = {
     //register을 요청하는 데이터라서 변수명 req라고 함.
     id: id.value,
-    nickname: nickname.value,
+    name: nickname.value,
     psword: psword.value,
   };
 
@@ -25,11 +27,11 @@ function register() {
       "content-Type": "application/json", // 헤더에 JSON데이터로 보낸다고 알려줌
     },
     body: JSON.stringify(req),
-  }) 
+  })
     .then((res) => res.json())
     .then((res) => {
       if (res.success) {
-        alert(res.msg)
+        alert(res.msg);
         location.href = "/login";
       } else {
         alert(res.msg);

@@ -2,7 +2,7 @@
 
 const { response } = require("express");
 const logger = require("../../config/logger");
-const User = require("../../models/user");
+const User = require("../../models/users/user");
 
 // 렌더링 하는 부분을 묶어서 rendering의 키 값에 가질 수 있도록 해줌
 const rendering = {

@@ -1,6 +1,6 @@
 "use strict";
 
-const userSchema = require("./user-schema");
+const userStorage = require("./userStorage");
 const jwt = require("jsonwebtoken");
 
 class User {
@@ -12,8 +12,7 @@ class User {
     const clientInfo = this.body;
     try {
       //정보 가져오기
-      const user = await userSchema.getUserInfo(clientInfo.id);
-
+      const user = await userStorage.getUserInfo(clientInfo.id);
       //로그인 로직
       if (user) {
         if (user.id === clientInfo.id && user.psword === clientInfo.psword) {
@@ -38,7 +37,7 @@ class User {
   async register() {
     const clientInfo = this.body;
     try {
-      const response = await userSchema.save(clientInfo);
+      const response = await userStorage.save(clientInfo);
       return { success: true, msg: "회원이 되신 걸 축하드립니다." };
     } catch (err) {
       return { success: false, msg: "서버 점검 중입니다.", err }; //db연결 실패
