@@ -1,7 +1,7 @@
 "use strict";
 
 const userSchema = require("./user-schema");
-const jwt = require('jsonwebtoken'); 
+const jwt = require("jsonwebtoken");
 
 class User {
   constructor(body) {
@@ -17,20 +17,20 @@ class User {
       //로그인 로직
       if (user) {
         if (user.id === clientInfo.id && user.psword === clientInfo.psword) {
-          const token = jwt.sign({userId: user.id }, process.env.JWT_SECRET);
+          const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
           return { token, success: true };
         }
         return {
           success: false,
           msg: "아이디와 비밀번호를 확인 후 다시 시도해주세요", // 비밀번호 틀렸을 때
         };
-      } 
+      }
       return {
         success: false,
         msg: "존재하지 않는 ID 입니다.", // 아이디 틀렸을 떄
       };
     } catch (err) {
-      return { success: false, msg: "서버 점검 중입니다.", err}; //db연결 실패, id 없을때
+      return { success: false, msg: "서버 점검 중입니다.", err }; //db연결 실패, id 없을때
     }
   }
 
@@ -39,9 +39,9 @@ class User {
     const clientInfo = this.body;
     try {
       const response = await userSchema.save(clientInfo);
-      return { success: true, msg: "회원이 되신 걸 축하드립니다."}
+      return { success: true, msg: "회원이 되신 걸 축하드립니다." };
     } catch (err) {
-      return { success: false, msg: "서버 점검 중입니다.", err}; //db연결 실패
+      return { success: false, msg: "서버 점검 중입니다.", err }; //db연결 실패
     }
   }
 }
