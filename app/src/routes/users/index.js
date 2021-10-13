@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const controller = require("./home-controller");
+const controller = require("./users-ctrl");
 const { verfyToken } = require("../middlewares/auth-middlewares");
 
 //컨트롤러 연결 - controller - rendering - home의 키 값 = 루트페이지
