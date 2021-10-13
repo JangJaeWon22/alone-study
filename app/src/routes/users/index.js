@@ -17,6 +17,4 @@ router.get("/user/me", verfyToken, (req, res) => {
 router.post("/login", controller.process.login);
 router.post("/register", controller.process.register);
 
-router.use("/api", express.urlencoded({ extended: false }), router);
-
 module.exports = router;
