@@ -10,7 +10,7 @@ const { verfyToken } = require("../middlewares/auth-middlewares");
 router.get("/", controller.rendering.home);
 router.get("/login", controller.rendering.login);
 router.get("/register", controller.rendering.register);
-router.get("/user/me", verfyToken, (req, res) => {
+router.get("/user/me", (req, res) => {
   res.send({});
 });
 
