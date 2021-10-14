@@ -1,6 +1,7 @@
 "use strict";
 
 const db = require("../../config/db");
+const bcrypt = require("bcrypt");
 
 class userStorage {
   //getUserInfo가 반환하는 값을 프로미스로 반환 해줘서 처리
@@ -16,17 +17,16 @@ class userStorage {
 
   //저장 부분
   static async save(clientInfo) {
-    console.log(clientInfo);
     return new Promise((resolve, reject) => {
+      const hashPsword = bcrypt.hashSync(clientInfo.psword, 10);
       const query = "INSERT INTO users(id, name, psword) VALUES(?, ?, ?);";
-      db.query(
-        query,
-        [clientInfo.id, clientInfo.name, clientInfo.psword],
-        (err) => {
-          if (err) reject(err);
-          else resolve({ success: true });
+      db.query(query, [clientInfo.id, clientInfo.name, hashPsword], (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve({ success: true });
         }
-      );
+      });
     });
   }
 }

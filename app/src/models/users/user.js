@@ -2,6 +2,7 @@
 
 const userStorage = require("./userStorage");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 class User {
   constructor(body) {
@@ -13,9 +14,14 @@ class User {
     try {
       //정보 가져오기
       const user = await userStorage.getUserInfo(clientInfo.id);
+      console.log(user.psword);
+      console.log(clientInfo.psword);
       //로그인 로직
       if (user) {
-        if (user.id === clientInfo.id && user.psword === clientInfo.psword) {
+        if (
+          user.id === clientInfo.id &&
+          bcrypt.compareSync(clientInfo.psword, user.psword)
+        ) {
           const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
           return { token, success: true };
         }
@@ -35,6 +41,7 @@ class User {
 
   //user.register();
   async register() {
+    //비밀번호와 비밀번호 확인은 앞단에서 진행함.
     const clientInfo = this.body;
     try {
       const response = await userStorage.save(clientInfo);
