@@ -15,9 +15,10 @@
 
 ---
 
-# 사용 오픈소스
+# 사용 framework
 
 1. codepen.io
+2. bulma
 
 ---
 
@@ -29,6 +30,7 @@
 4. mysql
 5. dotenv
 6. winston
+7. prettier
 
 # 공부 내용
 
